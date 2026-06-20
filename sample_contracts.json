@@ -1,0 +1,341 @@
+[{
+  "filename": "2 Aspley - 01.12.2024 - 31.12.2025 - AGL.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-12-2024",
+  "contract_end_date": "30-11-2028",
+  "signatories": [
+    {
+      "name": "Scott Taylor",
+      "position": "Chief Executive Officer"
+    }
+  ],
+  "location": "2 Aspley Crescent NIRIMBA QLD 4551",
+  "pricing": [
+    {
+      "energy_charge_rate": [
+        {
+          "peak": 15.4212,
+          "shoulder": null,
+          "off_peak": 10.6303
+        }
+      ],
+      "e_re_charges": [
+        {
+          "lret_charge": 26.7400,
+          "sres_charge": 40.0000,
+          "esc_charge": null,
+          "veec_charge": null
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "2 South Station Road Booval (CHL) - Indicative Embedded Electricity Supply Schedule.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": null,
+  "contract_end_date": null,
+  "signatories": [
+    {
+      "name": "John Rosetto",
+      "position": "Development Manager"
+    }
+  ],
+  "location": "2 South Station Road Booval Queensland 4304",
+  "pricing": [
+    {
+      "Indicative Residential & Retail Electricity Rates": [
+        {
+          "Discount Amount": "10%",
+          "Usage Charge": 23.10,
+          "Daily Supply Charge": 103.00,
+          "Total Bill based on 4600kWh": "$1458.00"
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "1990 Gold Coast Highway Utility Supply Agreement and Schedule_exec20240207",
+  "is_pricing_contract": true,
+  "contract_start_date": null,
+  "contract_end_date": null,
+  "signatories": [
+    {
+      "name": "John Rosetto",
+      "position": null
+    }
+  ],
+  "location": "1990 Gold Coast Highway, Miami Queensland 4220",
+  "pricing": [
+    {
+      "Hot Water": [
+        {
+          "Usage Charge ex GST":  1.790,
+          "Usage Charge inc GST":  1.969,
+          "Service charge ex GST":  29.00,
+          "Service charge inc GST":  31.90
+        }
+      ],
+      "Cold Water": [
+        {
+          "Usage Charge ex GST":  "As per water authority",
+          "Usage Charge inc GST":  "No GST",
+          "Service charge ex GST":  23.00,
+          "Service charge inc GST":  25.30
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "Affinity Yungaba 1.07.23 - 30.06.26 AGL.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-07-2023",
+  "contract_end_date": "30-06-2026",
+  "signatories": [
+    {
+      "name": "Paul Wilson",
+      "position": "General Manager"
+    }
+  ],
+  "location": "15 Anderson Street Kangaroo Point QLD 4169",
+  "pricing": [
+    {
+      "energy_charge_rate": [
+        {
+          "peak": 20.0992,
+          "shoulder": null,
+          "off_peak": 12.2027
+        }
+      ],
+      "e_re_charges": [
+        {
+          "lret_charge": 47.0500,
+          "sres_charge": 40.0000,
+          "esc_charge": null,
+          "veec_charge": null
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "Akira - 01.11.22-31.10.26 - Shell.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-11-2022",
+  "contract_end_date": "31-10-2026",
+  "signatories": [
+    {
+      "name": "Geoff McNamara",
+      "position": "BCM"
+    }
+  ],
+  "location": "Lot 4 17 Gibbon St, WOOLLOONGABBA, QLD, 4102",
+  "pricing": [
+    {
+      "QLD Energy Rates": [
+        {
+          "Peak Rate": 22.1277,
+          "Off Peak Rate": 12.9310,
+          "LREC Rate": 0.9754
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "Hot Water Proposal (Heat Pump) - Alegria CTS 48278 20251002.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": null,
+  "contract_end_date": null,
+  "signatories": [
+    {
+      "name": "Pip Hanrick",
+      "position": "Chairperson"
+    },
+    {
+      "name": "Scott Taylor",
+      "position": "CEO"
+    }
+  ],
+  "location": "Alegria, 4 Anderson Street, Scarborough, Queensland, 4020",
+  "pricing": [
+    {
+      "Proposal Details": [
+        {
+          "Hot Water Plant Value": 47857.70,
+          "Total amount payable by the Body Corporate": 8622.50,
+          "Agreement Term": "10 years"
+        }
+      ],
+      "Serviced Hot Water": [
+        {
+          "Usage Charge excluding GST": 2.7,
+          "Usage charge including GST": 2.97,
+          "Service Charge excluding GST": 45.00,
+          "Service Charge including GST": 49.50
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "IWA-EN-10y_12 Kelly Court_exec20210531.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": null,
+  "contract_end_date": null,
+  "signatories": [
+    {
+      "name": "Warren Kelly",
+      "position": "Director"
+    }
+  ],
+  "location": "12 Kelly Court, Landsborough 4550",
+  "pricing": [
+    {
+      "Works fee": [
+        {
+          "total": 12000.00,
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "MSA_Alegria_20251024.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-11-2025",
+  "contract_end_date": "31-10-2050",
+  "signatories": [
+    {
+      "name": "Pip Hanrick",
+      "position": "Chairperson"
+    },
+    {
+      "name": "Alan Daly",
+      "position": "Chief Commercial Officer"
+    }
+  ],
+  "location": "Alegria 4 Anderson Street Scarborough QLD 4020",
+  "pricing": [
+    {
+      "INFRASTRUCTURE CHARGES & SERVICES FEES (excl GST)": [
+        {
+          "Daily Service fee": 0.45,
+          "TOTAL Service fee": 0.45
+        }
+      ],
+      "USAGE CHARGES": [
+        {
+          "Hot Water Usage": 0.0270
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "QLD TOU BOOVAL 135654084  LOCALITY PLANNING ENERGY PTY LTD Energy Offer - Approved 26 02 16.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "17-02-2026",
+  "contract_end_date": "30-06-2028",
+  "signatories": [
+    {
+      "name": "Scott Taylor",
+      "position": "Chief Executive Officer"
+    }
+  ],
+  "location": "2 South Station Road BOOVAL QLD 4304",
+  "pricing": [
+    {
+      "energy_charge_rate": [
+        {
+          "peak": 12.3538,
+          "shoulder": null,
+          "off_peak": 8.4917
+        }
+      ],
+      "e_re_charges": [
+        {
+          "lret_charge": 5.4897,
+          "sres_charge": 40.0000,
+          "esc_charge": null,
+          "veec_charge": null
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "Alexandra Beach Resort 1.1.23 - 31.12.25 AGL.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-01-2023",
+  "contract_end_date": "31-12-2025",
+  "signatories": [
+    {
+      "name": "Paul Wilson",
+      "position": "General Manager"
+    }
+  ],
+  "location": "180 Alexandra Parade ALEXANDRA HEADLAND QLD 4572",
+  "pricing": [
+    {
+      "energy_charge_rate": [
+        {
+          "peak": 16.0615,
+          "shoulder": null,
+          "off_peak": 10.0961
+        }
+      ],
+      "e_re_charges": [
+        {
+          "lret_charge": 50.1000,
+          "sres_charge": 40.0000,
+          "esc_charge": null,
+          "veec_charge": null
+        }
+      ]
+    }
+  ]
+},
+{
+  "filename": "EXEC Schedule Alexandra Beach Resort CTS 30867.pdf",
+  "is_pricing_contract": true,
+  "contract_start_date": "01-01-2023",
+  "contract_end_date": "31-12-2025",
+  "signatories": [
+    {
+      "name": "Shaun Newton",
+      "position": "Strata Manager"
+    }
+  ],
+  "location": "180 Alexandra Parade ALEXANDRA HEADLAND QLD 4572",
+  "pricing": [
+    {
+      "Residential Electricity Supply Rates": [
+        {
+          "Usage charge": 25.17,
+          "Daily Supply Charge": 63.32
+        }
+      ],
+      "Common Area Electricity Supply Rates": [
+        {
+          "Usage charge": 25.17,
+          "Daily Supply Charge": 63.32
+        }
+      ],
+      "Commercial Electricity Supply Rates": [
+        {
+          "Usage charge": 28.75,
+          "Daily Supply Charge": 63.32
+        }
+      ],
+      "Meter Charge": [
+        {
+          "Metering charge": 24.20
+        }
+      ]
+    }
+  ]
+}
+]
