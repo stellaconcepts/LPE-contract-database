@@ -7,6 +7,7 @@ interface Props {
   filename: string | null
   onDirtyChange: (dirty: boolean) => void
   onSaved: () => void
+  onGoToSource: (value: string) => void
 }
 
 const SHELL = 'flex-1 min-h-0 overflow-auto border-b'
@@ -29,14 +30,27 @@ function toEditable(d: ContractDetail): ContractEditable {
   return rest
 }
 
+function GoToSource({ value, onClick }: { value: string; onClick: (v: string) => void }) {
+  return (
+    <button
+      onClick={() => onClick(value)}
+      title="Find in PDF"
+      className="text-[10px] text-gray-400 hover:text-blue-600"
+    >
+      ⌖
+    </button>
+  )
+}
+
 interface PricingTableProps {
   items: PricingLineItem[]
   originalItems: PricingLineItem[]
   editable: boolean
   onCellChange?: (itemIdx: number, col: string, raw: string, original: unknown) => void
+  onGoToSource?: (value: string) => void
 }
 
-function PricingTable({ items, originalItems, editable, onCellChange }: PricingTableProps) {
+function PricingTable({ items, originalItems, editable, onCellChange, onGoToSource }: PricingTableProps) {
   const columns = Array.from(new Set(items.flatMap((item) => Object.keys(item))))
   return (
     <div className="border rounded-lg overflow-hidden">
@@ -62,7 +76,12 @@ function PricingTable({ items, originalItems, editable, onCellChange }: PricingT
                       className="w-full border rounded px-1 py-0.5"
                     />
                   ) : (
-                    cell(item[col])
+                    <span className="inline-flex items-center gap-1">
+                      {cell(item[col])}
+                      {onGoToSource && item[col] !== null && item[col] !== undefined && (
+                        <GoToSource value={String(item[col])} onClick={onGoToSource} />
+                      )}
+                    </span>
                   )}
                 </td>
               ))}
@@ -74,7 +93,7 @@ function PricingTable({ items, originalItems, editable, onCellChange }: PricingT
   )
 }
 
-export default function DetailPanel({ filename, onDirtyChange, onSaved }: Props) {
+export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSource }: Props) {
   const [detail, setDetail] = useState<ContractDetail | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -251,7 +270,13 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved }: Props)
               />
             </span>
           ) : (
-            <>{detail.contract_start_date ?? 'Not specified'} – {detail.contract_end_date ?? 'Not specified'}</>
+            <span className="inline-flex items-center gap-1">
+              {detail.contract_start_date ?? 'Not specified'}
+              {detail.contract_start_date && <GoToSource value={detail.contract_start_date} onClick={onGoToSource} />}
+              <span>–</span>
+              {detail.contract_end_date ?? 'Not specified'}
+              {detail.contract_end_date && <GoToSource value={detail.contract_end_date} onClick={onGoToSource} />}
+            </span>
           )}
         </div>
 
@@ -264,7 +289,10 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved }: Props)
               className="border rounded px-1 py-0.5 w-full max-w-sm"
             />
           ) : (
-            detail.location
+            <span className="inline-flex items-center gap-1">
+              {detail.location}
+              <GoToSource value={detail.location} onClick={onGoToSource} />
+            </span>
           )}
         </div>
 
@@ -293,7 +321,13 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved }: Props)
                   </button>
                 </li>
               ) : (
-                <li key={i}>{s.name} — {s.position ?? 'unknown'}</li>
+                <li key={i} className="inline-flex items-center gap-1">
+                  {s.name}
+                  <GoToSource value={s.name} onClick={onGoToSource} />
+                  <span>—</span>
+                  {s.position ?? 'unknown'}
+                  {s.position && <GoToSource value={s.position} onClick={onGoToSource} />}
+                </li>
               )
             )}
           </ul>
@@ -318,6 +352,7 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved }: Props)
                     originalItems={detail.pricing[blockIdx]?.[category] ?? items}
                     editable={editing}
                     onCellChange={(itemIdx, col, raw, original) => updatePricingCell(blockIdx, category, itemIdx, col, raw, original)}
+                    onGoToSource={editing ? undefined : onGoToSource}
                   />
                 </div>
               ))

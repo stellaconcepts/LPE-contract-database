@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+.pdf-highlight {
+  background: #fde68a;
+}
+.pdf-highlight-current {
+  background: #fb923c;
+  outline: 2px solid #ea580c;
+}

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import ContractList from './components/ContractList'
 import DetailPanel from './components/DetailPanel'
 import PdfViewer from './components/PdfViewer'
@@ -7,10 +7,22 @@ export default function App() {
   const [selectedFilename, setSelectedFilename] = useState<string | null>(null)
   const [dirty, setDirty] = useState(false)
   const [refreshToken, setRefreshToken] = useState(0)
+  const [findTarget, setFindTarget] = useState<{ value: string; nonce: number } | null>(null)
+  const nonceRef = useRef(0)
 
   function handleSelect(filename: string) {
     if (dirty && !window.confirm('You have unsaved changes. Discard them?')) return
     setSelectedFilename(filename)
+    setFindTarget(null)
+  }
+
+  function handleSelectionUnavailable() {
+    setSelectedFilename(null)
+    setFindTarget(null)
+  }
+
+  function handleGoToSource(value: string) {
+    setFindTarget({ value, nonce: ++nonceRef.current })
   }
 
   return (
@@ -18,7 +30,7 @@ export default function App() {
       <ContractList
         selectedFilename={selectedFilename}
         onSelect={handleSelect}
-        onSelectionUnavailable={() => setSelectedFilename(null)}
+        onSelectionUnavailable={handleSelectionUnavailable}
         refreshToken={refreshToken}
       />
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
@@ -26,8 +38,9 @@ export default function App() {
           filename={selectedFilename}
           onDirtyChange={setDirty}
           onSaved={() => setRefreshToken((t) => t + 1)}
+          onGoToSource={handleGoToSource}
         />
-        <PdfViewer filename={selectedFilename} />
+        <PdfViewer filename={selectedFilename} findTarget={findTarget} />
       </div>
     </div>
   )
