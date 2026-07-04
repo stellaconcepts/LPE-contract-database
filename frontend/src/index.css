@@ -13,6 +13,10 @@
   --color-accent-hover:  #1d4ed8;
   --color-accent-subtle: #bfdbfe;
 
+  /* Brand - LPE logo/site colors, header only */
+  --color-brand-blue: #5FCEF8;
+  --color-brand-navy: #04124D;
+
   /* Status colors */
   --color-success:      #16a34a;
   --color-success-bg:   #dcfce7;
