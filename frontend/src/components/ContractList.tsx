@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useVirtualizer } from '@tanstack/react-virtual'
-import { fetchContracts } from '../api'
+import { deleteUpload, fetchContracts, fetchUploadedFiles } from '../api'
 import type { ContractDetail, PricingBlock } from '../types'
-import PricingBadge from './PricingBadge'
 
 interface Props {
   selectedFilename: string | null
   onSelect: (filename: string) => void
   onSelectionUnavailable: () => void
+  onDeleted: (filename: string) => void
   refreshToken: number
 }
 
@@ -63,8 +63,9 @@ function highlight(text: string, term: string) {
   )
 }
 
-export default function ContractList({ selectedFilename, onSelect, onSelectionUnavailable, refreshToken }: Props) {
+export default function ContractList({ selectedFilename, onSelect, onSelectionUnavailable, onDeleted, refreshToken }: Props) {
   const [contracts, setContracts] = useState<ContractDetail[]>([])
+  const [uploadedFilenames, setUploadedFilenames] = useState<Set<string>>(new Set())
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const parentRef = useRef<HTMLDivElement>(null)
@@ -82,7 +83,21 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
       .then(setContracts)
       .catch((e: Error) => setError(e.message))
       .finally(() => setLoading(false))
+    fetchUploadedFiles()
+      .then((files) => setUploadedFilenames(new Set(files.map((f) => f.filename))))
+      .catch(() => {})
   }, [refreshToken])
+
+  async function handleDelete(e: React.MouseEvent, filename: string) {
+    e.stopPropagation()
+    if (!window.confirm(`Delete "${filename}"? This removes both the extracted data and the PDF.`)) return
+    try {
+      await deleteUpload(filename)
+      onDeleted(filename)
+    } catch (e) {
+      window.alert((e as Error).message)
+    }
+  }
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedSearch(searchInput), 200)
@@ -233,12 +248,14 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
                         Edited
                       </span>
                     )}
-                    {selected ? (
-                      <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded-full font-medium bg-white/20 text-white">
-                        {c.is_pricing_contract ? 'Pricing' : 'No pricing'}
-                      </span>
-                    ) : (
-                      <PricingBadge isPricing={c.is_pricing_contract} />
+                    {uploadedFilenames.has(c.filename) && (
+                      <button
+                        onClick={(e) => handleDelete(e, c.filename)}
+                        aria-label={`Delete ${c.filename}`}
+                        className={`shrink-0 ${selected ? 'text-white/80 hover:text-white' : 'text-gray-400 hover:text-red-600'}`}
+                      >
+                        🗑
+                      </button>
                     )}
                   </div>
                   <div className={`text-[11px] truncate ${selected ? 'text-blue-200' : 'text-gray-400'}`}>

@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import ContractList from './components/ContractList'
 import DetailPanel from './components/DetailPanel'
+import Header from './components/Header'
 import PdfViewer from './components/PdfViewer'
 import UploadPanel from './components/UploadPanel'
 
@@ -41,24 +42,28 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white text-sm">
-      <div className="w-80 shrink-0 flex flex-col border-r overflow-hidden">
-        <UploadPanel onUploaded={handleUploaded} onDeleted={handleDeleted} />
-        <ContractList
-          selectedFilename={selectedFilename}
-          onSelect={handleSelect}
-          onSelectionUnavailable={handleSelectionUnavailable}
-          refreshToken={refreshToken}
-        />
-      </div>
-      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-        <DetailPanel
-          filename={selectedFilename}
-          onDirtyChange={setDirty}
-          onSaved={() => setRefreshToken((t) => t + 1)}
-          onGoToSource={handleGoToSource}
-        />
-        <PdfViewer filename={selectedFilename} findTarget={findTarget} />
+    <div className="flex flex-col h-screen overflow-hidden bg-white text-sm">
+      <Header />
+      <div className="flex-1 flex min-h-0 overflow-hidden">
+        <div className="w-80 shrink-0 flex flex-col border-r overflow-hidden">
+          <ContractList
+            selectedFilename={selectedFilename}
+            onSelect={handleSelect}
+            onSelectionUnavailable={handleSelectionUnavailable}
+            onDeleted={handleDeleted}
+            refreshToken={refreshToken}
+          />
+          <UploadPanel onUploaded={handleUploaded} onDeleted={handleDeleted} />
+        </div>
+        <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+          <DetailPanel
+            filename={selectedFilename}
+            onDirtyChange={setDirty}
+            onSaved={() => setRefreshToken((t) => t + 1)}
+            onGoToSource={handleGoToSource}
+          />
+          <PdfViewer filename={selectedFilename} findTarget={findTarget} />
+        </div>
       </div>
     </div>
   )

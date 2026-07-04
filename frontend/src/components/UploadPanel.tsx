@@ -79,7 +79,7 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
   const currentIndex = job ? stepIndex(job.step) : -1
 
   return (
-    <div className="px-3 py-2 border-b bg-white shrink-0 space-y-1.5">
+    <div className="px-3 py-2 border-t bg-white shrink-0 space-y-1.5">
       <label className="text-xs px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer inline-block">
         Upload contract PDF
         <input
