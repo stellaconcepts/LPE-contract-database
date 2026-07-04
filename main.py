@@ -193,14 +193,7 @@ def _set_job(job_id: str, **updates) -> None:
 
 def run_extraction_job(job_id: str, path: Path, filename: str) -> None:
     try:
-        _set_job(job_id, step="reading_pdf")
-        text, page_count = extraction.extract_pdf_text(path)
-        ocr_used = extraction.needs_ocr(text, page_count)
-        _set_job(job_id, ocr_used=ocr_used)
-
-        if ocr_used:
-            _set_job(job_id, step="ocr")
-            text = extraction.ocr_pdf(path)
+        text = extraction.ocr_pdf(path)
 
         if len(text.strip()) < extraction.MIN_EXTRACTED_CHARS:
             raise ValueError(
@@ -302,8 +295,7 @@ async def create_upload(file: UploadFile = File(...)):
     with _jobs_lock:
         JOBS[job_id] = {
             "status": "running",
-            "step": "reading_pdf",
-            "ocr_used": None,
+            "step": "ocr",
             "error": None,
             "contract": None,
         }

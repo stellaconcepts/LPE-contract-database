@@ -8,7 +8,6 @@ interface Props {
 }
 
 const STEPS: { key: UploadStep; label: string }[] = [
-  { key: 'reading_pdf', label: 'Reading PDF' },
   { key: 'ocr', label: 'Running OCR' },
   { key: 'extracting', label: 'Extracting with Claude' },
   { key: 'done', label: 'Done' },
@@ -98,7 +97,6 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
       {job && (
         <ul className="text-[11px] space-y-0.5">
           {STEPS.map((s, i) => {
-            const skipped = s.key === 'ocr' && job.ocr_used === false
             const done = job.status === 'done' || i < currentIndex
             const active = i === currentIndex && job.status === 'running'
             const failed = i === currentIndex && job.status === 'error'
@@ -106,15 +104,13 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
               <li
                 key={s.key}
                 className={
-                  skipped
-                    ? 'text-gray-300 line-through'
-                    : failed
-                      ? 'text-red-600 font-medium'
-                      : active
-                        ? 'text-blue-600 font-medium'
-                        : done
-                          ? 'text-green-600'
-                          : 'text-gray-400'
+                  failed
+                    ? 'text-red-600 font-medium'
+                    : active
+                      ? 'text-blue-600 font-medium'
+                      : done
+                        ? 'text-green-600'
+                        : 'text-gray-400'
                 }
               >
                 {failed ? '✗' : active ? '…' : done ? '✓' : '·'} {s.label}

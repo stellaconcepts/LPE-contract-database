@@ -21,12 +21,11 @@ export interface ContractDetail extends ContractEditable {
   last_edited_at: string | null
 }
 
-export type UploadStep = 'reading_pdf' | 'ocr' | 'extracting' | 'done'
+export type UploadStep = 'ocr' | 'extracting' | 'done'
 
 export interface UploadJob {
   status: 'running' | 'done' | 'error'
   step: UploadStep
-  ocr_used: boolean | null
   error: string | null
   contract: ContractDetail | null
 }
