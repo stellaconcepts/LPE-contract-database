@@ -8,14 +8,10 @@
   --color-neutral-400: #9ca3af;
   --color-neutral-500: #6b7280;
 
-  /* Accent - existing blue, unchanged */
-  --color-accent:        #2563eb;
-  --color-accent-hover:  #1d4ed8;
-  --color-accent-subtle: #bfdbfe;
-
-  /* Brand - LPE logo/site colors, header only */
-  --color-brand-blue: #5FCEF8;
-  --color-brand-navy: #04124D;
+  /* Accent - LPE brand colors */
+  --color-accent:        #04124D; /* LPE navy - primary actions, selected state */
+  --color-accent-hover:  #0a2472; /* lighter navy for hover */
+  --color-accent-subtle: #5FCEF8; /* LPE swirl blue - focus rings, borders, light accents */
 
   /* Status colors */
   --color-success:      #16a34a;

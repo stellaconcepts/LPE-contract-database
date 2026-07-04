@@ -18,6 +18,7 @@ interface FindTarget {
 interface Props {
   filename: string | null
   findTarget: FindTarget | null
+  heightPercent: number
 }
 
 interface PageIndex {
@@ -30,7 +31,7 @@ interface Occurrence {
   itemIndices: number[]
 }
 
-const SHELL = 'h-3/5 shrink-0 border-t flex flex-col bg-gray-50'
+const SHELL = 'shrink-0 flex flex-col bg-gray-50'
 
 const MONTHS = [
   'January', 'February', 'March', 'April', 'May', 'June',
@@ -120,7 +121,7 @@ function searchAllPages(pageIndexes: Map<number, PageIndex>, value: string): Occ
   return [...seen.values()].sort((a, b) => a.pageNumber - b.pageNumber || a.itemIndices[0] - b.itemIndices[0])
 }
 
-export default function PdfViewer({ filename, findTarget }: Props) {
+export default function PdfViewer({ filename, findTarget, heightPercent }: Props) {
   const [numPages, setNumPages] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [pdfDoc, setPdfDoc] = useState<PDFDocumentProxy | null>(null)
@@ -213,14 +214,14 @@ export default function PdfViewer({ filename, findTarget }: Props) {
 
   if (!filename) {
     return (
-      <div className={`${SHELL} items-center justify-center text-gray-400`}>
+      <div className={`${SHELL} items-center justify-center text-gray-400`} style={{ height: `${heightPercent}%` }}>
         Select a contract to view its PDF
       </div>
     )
   }
 
   return (
-    <div className={SHELL}>
+    <div className={SHELL} style={{ height: `${heightPercent}%` }}>
       {findTarget && (
         <div className="shrink-0 px-3 py-1.5 border-b bg-white flex items-center justify-end gap-2 text-xs">
           {indexing ? (
@@ -254,7 +255,7 @@ export default function PdfViewer({ filename, findTarget }: Props) {
       )}
       <div ref={containerRef} className="flex-1 overflow-auto">
         {error ? (
-          <div className="h-full flex items-center justify-center text-red-400">{error}</div>
+          <div className="h-full flex items-center justify-center text-danger">{error}</div>
         ) : (
           <Document
             key={filename}

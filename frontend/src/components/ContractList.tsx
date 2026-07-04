@@ -146,29 +146,29 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
 
   if (error) {
     return (
-      <div className="w-80 shrink-0 flex items-center justify-center border-r text-red-500 p-4 text-xs">
+      <div className="w-80 flex-1 min-h-0 flex items-center justify-center border-r text-danger p-4 text-xs">
         {error}
       </div>
     )
   }
 
   return (
-    <div className="w-80 shrink-0 flex flex-col border-r bg-gray-50 overflow-hidden">
+    <div className="w-80 flex-1 min-h-0 flex flex-col border-r bg-neutral-50 overflow-hidden">
       <div className="px-3 py-2 border-b bg-white shrink-0 space-y-2">
-        <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        <div className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">
           Contracts ({visible.length} of {contracts.length})
         </div>
         <input
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Search filename, location, signatory, pricing…"
-          className="w-full text-xs border rounded px-2 py-1"
+          className="w-full text-xs border border-neutral-200 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
         />
         <div className="flex items-center gap-1 text-[11px]">
           <select
             value={pricingFilter}
             onChange={(e) => setPricingFilter(e.target.value as PricingFilter)}
-            className="border rounded px-1 py-0.5"
+            className="border border-neutral-200 rounded px-2 py-1 bg-white cursor-pointer hover:border-accent-subtle focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
           >
             <option value="all">All pricing</option>
             <option value="pricing">Pricing only</option>
@@ -177,26 +177,31 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
           <select
             value={editedFilter}
             onChange={(e) => setEditedFilter(e.target.value as EditedFilter)}
-            className="border rounded px-1 py-0.5"
+            className="border border-neutral-200 rounded px-2 py-1 bg-white cursor-pointer hover:border-accent-subtle focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
           >
             <option value="all">All edits</option>
             <option value="edited">Edited only</option>
             <option value="unedited">Unedited</option>
           </select>
-          <button onClick={resetFilters} className="ml-auto text-blue-600 hover:underline">
+          <button onClick={resetFilters} className="ml-auto text-accent hover:underline">
             Reset filters
           </button>
         </div>
-        <label className="flex items-center gap-1 text-[11px]">
-          <input type="checkbox" checked={missingDatesOnly} onChange={(e) => setMissingDatesOnly(e.target.checked)} />
+        <label className="flex items-center gap-1.5 text-[11px]">
+          <input
+            type="checkbox"
+            checked={missingDatesOnly}
+            onChange={(e) => setMissingDatesOnly(e.target.checked)}
+            className="accent-accent"
+          />
           Missing start or end date
         </label>
         <div className="flex items-center gap-1 text-[11px]">
-          <span className="text-gray-400">Sort:</span>
+          <span className="text-neutral-400">Sort:</span>
           <select
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as SortKey)}
-            className="border rounded px-1 py-0.5"
+            className="border border-neutral-200 rounded px-2 py-1 bg-white cursor-pointer hover:border-accent-subtle focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
           >
             <option value="filename">Filename</option>
             <option value="start">Start date</option>
@@ -204,7 +209,7 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
           </select>
           <button
             onClick={() => setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'))}
-            className="border rounded px-1.5 py-0.5"
+            className="border border-neutral-200 rounded px-2 py-1 cursor-pointer hover:border-accent-subtle focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent"
             aria-label="Toggle sort direction"
           >
             {sortDir === 'asc' ? '▲' : '▼'}
@@ -213,7 +218,7 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
       </div>
       <div ref={parentRef} className="flex-1 overflow-auto">
         {loading ? (
-          <div className="p-4 text-xs text-gray-400">Loading…</div>
+          <div className="p-4 text-xs text-neutral-400">Loading…</div>
         ) : (
           <div style={{ height: `${virtualizer.getTotalSize()}px`, position: 'relative' }}>
             {virtualizer.getVirtualItems().map((vItem) => {
@@ -231,7 +236,7 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
                     transform: `translateY(${vItem.start}px)`,
                   }}
                   className={`px-3 py-2 cursor-pointer border-b flex flex-col justify-center gap-0.5 ${
-                    selected ? 'bg-blue-600 text-white' : 'hover:bg-white'
+                    selected ? 'bg-accent text-white' : 'hover:bg-white'
                   }`}
                   onClick={() => onSelect(c.filename)}
                 >
@@ -242,7 +247,7 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
                     {c.has_edit && (
                       <span
                         className={`shrink-0 text-[10px] px-1.5 py-0.5 rounded-full font-medium ${
-                          selected ? 'bg-white/20 text-white' : 'bg-amber-100 text-amber-700'
+                          selected ? 'bg-white/20 text-white' : 'bg-warning-bg text-warning-text'
                         }`}
                       >
                         Edited
@@ -252,13 +257,13 @@ export default function ContractList({ selectedFilename, onSelect, onSelectionUn
                       <button
                         onClick={(e) => handleDelete(e, c.filename)}
                         aria-label={`Delete ${c.filename}`}
-                        className={`shrink-0 ${selected ? 'text-white/80 hover:text-white' : 'text-gray-400 hover:text-red-600'}`}
+                        className={`shrink-0 ${selected ? 'text-white/80 hover:text-white' : 'text-neutral-400 hover:text-danger'}`}
                       >
                         🗑
                       </button>
                     )}
                   </div>
-                  <div className={`text-[11px] truncate ${selected ? 'text-blue-200' : 'text-gray-400'}`}>
+                  <div className={`text-[11px] truncate ${selected ? 'text-white/70' : 'text-neutral-400'}`}>
                     {highlight(c.location, debouncedSearch)} · {dateRange(c)}
                   </div>
                 </div>

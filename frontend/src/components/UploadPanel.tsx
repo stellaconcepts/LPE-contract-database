@@ -79,8 +79,9 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
   const currentIndex = job ? stepIndex(job.step) : -1
 
   return (
-    <div className="px-3 py-2 border-t bg-white shrink-0 space-y-1.5">
-      <label className="text-xs px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 cursor-pointer inline-block">
+    <div className="px-3 py-2 border-t bg-white shrink-0 h-56 overflow-y-auto space-y-2">
+      <div className="text-xs font-semibold text-neutral-500 uppercase tracking-wide">Upload</div>
+      <label className="w-full text-xs px-2 py-1.5 rounded bg-accent text-white hover:bg-accent-hover cursor-pointer flex items-center justify-center gap-1.5">
         Upload contract PDF
         <input
           ref={inputRef}
@@ -105,12 +106,12 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
                 key={s.key}
                 className={
                   failed
-                    ? 'text-red-600 font-medium'
+                    ? 'text-danger font-medium'
                     : active
-                      ? 'text-blue-600 font-medium'
+                      ? 'text-accent font-medium'
                       : done
-                        ? 'text-green-600'
-                        : 'text-gray-400'
+                        ? 'text-success'
+                        : 'text-neutral-400'
                 }
               >
                 {failed ? '✗' : active ? '…' : done ? '✓' : '·'} {s.label}
@@ -119,28 +120,28 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
           })}
         </ul>
       )}
-      {job?.status === 'error' && <p className="text-[11px] text-red-500">{job.error}</p>}
-      {error && <p className="text-[11px] text-red-500">{error}</p>}
+      {job?.status === 'error' && <p className="text-[11px] text-danger">{job.error}</p>}
+      {error && <p className="text-[11px] text-danger">{error}</p>}
 
       {files.length > 0 && (
-        <ul className="text-[11px] space-y-0.5 border-t pt-1.5">
+        <ul className="text-[11px] space-y-1 border-t pt-2">
           {files.map((f) => (
-            <li key={f.filename} className="flex items-center gap-1 min-w-0">
+            <li key={f.filename} className="flex items-center gap-1.5 min-w-0">
               <span
-                className={`shrink-0 text-[10px] px-1 rounded ${
+                className={`shrink-0 text-[10px] px-1.5 py-0.5 rounded ${
                   f.status === 'uploaded'
-                    ? 'bg-green-100 text-green-700'
+                    ? 'bg-success-bg text-success-text'
                     : f.status === 'processing'
-                      ? 'bg-blue-100 text-blue-700'
-                      : 'bg-red-100 text-red-700'
+                      ? 'bg-accent-subtle/20 text-accent'
+                      : 'bg-danger/10 text-danger'
                 }`}
               >
                 {f.status === 'uploaded' ? 'Uploaded' : f.status === 'processing' ? 'Processing…' : 'Failed'}
               </span>
-              <span className="truncate flex-1 text-gray-600">{f.filename}</span>
+              <span className="truncate flex-1 text-neutral-500">{f.filename}</span>
               <button
                 onClick={() => handleDelete(f.filename)}
-                className="shrink-0 text-red-500 hover:underline"
+                className="shrink-0 text-danger hover:underline"
               >
                 Delete
               </button>
@@ -148,7 +149,7 @@ export default function UploadPanel({ onUploaded, onDeleted }: Props) {
           ))}
         </ul>
       )}
-      {filesError && <p className="text-[11px] text-red-500">{filesError}</p>}
+      {filesError && <p className="text-[11px] text-danger">{filesError}</p>}
     </div>
   )
 }

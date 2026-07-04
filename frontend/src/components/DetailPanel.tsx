@@ -10,7 +10,7 @@ interface Props {
   onGoToSource: (value: string) => void
 }
 
-const SHELL = 'flex-1 min-h-0 overflow-auto border-b'
+const SHELL = 'flex-1 min-h-0 overflow-auto'
 
 function cell(value: unknown): string {
   return value === null || value === undefined ? '—' : String(value)
@@ -32,12 +32,11 @@ function toEditable(d: ContractDetail): ContractEditable {
 
 function GoToSource({ value, onClick }: { value: string; onClick: (v: string) => void }) {
   return (
-    <button
-      onClick={() => onClick(value)}
-      title="Find in PDF"
-      className="text-[10px] text-gray-400 hover:text-blue-600"
-    >
-      ⌖
+    <button onClick={() => onClick(value)} title="Find in PDF" className="inline-flex text-accent-subtle hover:text-accent">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className="w-3 h-3">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+      </svg>
     </button>
   )
 }
@@ -197,7 +196,7 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSo
   }
   if (error) {
     return (
-      <div className={`${SHELL} flex items-center justify-center text-red-400`}>
+      <div className={`${SHELL} flex items-center justify-center text-danger`}>
         {error}
       </div>
     )
@@ -226,7 +225,7 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSo
                 <button
                   onClick={saveEdit}
                   disabled={saving}
-                  className="text-xs px-2 py-1 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+                  className="text-xs px-2 py-1 rounded bg-accent text-white hover:bg-accent-hover disabled:opacity-50"
                 >
                   {saving ? 'Saving…' : 'Save'}
                 </button>
@@ -235,9 +234,9 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSo
                 </button>
               </>
             )}
-            {justSaved && <span className="text-xs text-green-600">Saved</span>}
+            {justSaved && <span className="text-xs text-success">Saved</span>}
           </div>
-          {saveError && <p className="text-xs text-red-500 mt-1">{saveError}</p>}
+          {saveError && <p className="text-xs text-danger mt-1">{saveError}</p>}
         </div>
 
         {editing && draft ? (
@@ -316,7 +315,7 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSo
                     placeholder="Position"
                     className="border rounded px-1 py-0.5 flex-1"
                   />
-                  <button onClick={() => removeSignatory(i)} className="text-red-500 text-xs px-1" aria-label="Remove signatory">
+                  <button onClick={() => removeSignatory(i)} className="text-danger text-xs px-1" aria-label="Remove signatory">
                     ✕
                   </button>
                 </li>
@@ -332,7 +331,7 @@ export default function DetailPanel({ filename, onDirtyChange, onSaved, onGoToSo
             )}
           </ul>
           {editing && (
-            <button onClick={addSignatory} className="text-xs text-blue-600 mt-1 hover:underline">
+            <button onClick={addSignatory} className="text-xs text-accent mt-1 hover:underline">
               + Add signatory
             </button>
           )}
