@@ -1,9 +1,62 @@
 @import "tailwindcss";
 
+@theme {
+  /* Neutral scale - surfaces, borders, secondary text */
+  --color-neutral-50:  #f9fafb;
+  --color-neutral-100: #f3f4f6;
+  --color-neutral-200: #e5e7eb;
+  --color-neutral-400: #9ca3af;
+  --color-neutral-500: #6b7280;
+
+  /* Accent - existing blue, unchanged */
+  --color-accent:        #2563eb;
+  --color-accent-hover:  #1d4ed8;
+  --color-accent-subtle: #bfdbfe;
+
+  /* Status colors */
+  --color-success:      #16a34a;
+  --color-success-bg:   #dcfce7;
+  --color-success-text: #15803d;
+
+  --color-warning-bg:   #fef3c7;
+  --color-warning-text: #b45309;
+
+  --color-danger:       #ef4444;
+  --color-danger-muted: #f87171;
+
+  /* PDF text-highlight marks (raw HTML injection, see below) */
+  --color-highlight:              #fde68a;
+  --color-highlight-current:      #fb923c;
+  --color-highlight-current-ring: #ea580c;
+}
+
+/* Tailwind v4 has no default border color (bare `border` = currentColor);
+   give every bare border/divide utility the neutral tint without touching
+   every call site across 4 components. */
+@layer base {
+  *, ::after, ::before {
+    border-color: var(--color-neutral-200, currentColor);
+  }
+}
+
+/*
+ * Spacing convention (Tailwind defaults, no new tokens needed - already small/consistent):
+ *   gap-1 / p-1   - compact inline controls
+ *   px-1.5 py-0.5 - badge padding
+ *   px-2 py-1     - buttons, inputs, small controls
+ *   px-3 py-2     - list rows, table cells, panel header bars
+ *   p-4           - panel/page-level padding (empty/loading/error states)
+ *
+ * Radius convention:
+ *   rounded-full - badges/pills only
+ *   rounded      - inputs, buttons, table wrapper
+ *   rounded-lg   - container/card wrapper only
+ */
+
 .pdf-highlight {
-  background: #fde68a;
+  background: var(--color-highlight);
 }
 .pdf-highlight-current {
-  background: #fb923c;
-  outline: 2px solid #ea580c;
+  background: var(--color-highlight-current);
+  outline: 2px solid var(--color-highlight-current-ring);
 }
