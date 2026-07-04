@@ -6,6 +6,9 @@ contract_index.sqlite
 
 # Real contract PDFs — large, sensitive, not source
 All_Parts_ocr/
+uploaded_contracts/
+uploaded_contracts.json
+uploaded_contracts.json.tmp
 
 frontend/node_modules/
 frontend/dist/
