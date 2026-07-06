@@ -10,7 +10,7 @@ _TRAILING_COMMA = re.compile(r",(\s*[}\]])")
 
 
 class Signatory(BaseModel):
-    name: str
+    name: str | None = None
     position: str | None = None
 
 

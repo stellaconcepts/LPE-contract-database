@@ -10,6 +10,7 @@ uploaded_contracts/
 uploaded_contracts.json
 uploaded_contracts.json.tmp
 sample_contracts/
+/*.pdf
 
 frontend/node_modules/
 frontend/dist/

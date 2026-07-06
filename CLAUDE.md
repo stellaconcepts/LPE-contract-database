@@ -29,8 +29,9 @@ Each contract object has these stable top-level fields:
     is_pricing_contract   boolean
     contract_start_date   string "DD-MM-YYYY" or null
     contract_end_date     string "DD-MM-YYYY" or null
-    signatories           array of { name, position }; position may be null,
-                          and there may be more than one signatory
+    signatories           array of { name, position }; name or position may be
+                          null (e.g. illegible handwriting), and there may be
+                          more than one signatory
     location              string
     pricing               array of blocks. Each block maps a category name to an
                           array of line-item objects. The category names and the
